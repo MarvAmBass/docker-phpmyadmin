@@ -15,5 +15,6 @@ then
   PHPMYADMIN_RELATIVE_URL_ROOT="/" 
 fi
 
+echo ">> making phpmyadmin available beneath: $PHPMYADMIN_RELATIVE_URL_ROOT"
 mkdir -p "/usr/share/nginx/html$PHPMYADMIN_RELATIVE_URL_ROOT"
-mv /phpmyadmin/* "/usr/share/nginx/html$PHPMYADMIN_RELATIVE_URL_ROOT"
+cp -a /phpmyadmin/* "/usr/share/nginx/html$PHPMYADMIN_RELATIVE_URL_ROOT"
