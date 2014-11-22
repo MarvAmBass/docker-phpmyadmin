@@ -17,9 +17,11 @@ View in GitHub [MarvAmBass/docker-phpmyadmin](https://github.com/MarvAmBass/dock
 
 * __DH\_SIZE__
  * default: 512 fast but a bit unsecure. if you need more security just use a higher value
-* __MY\_MYSQL\_PORT__
+* __PHPMYADMIN\_MYSQL\_PORT__
  * default: _3306_ - if you use a different mysql port change it
- 
+* __PHPMYADMIN\_RELATIVE\_URL\_ROOT__
+ * default: _/_ - you can chance that to /phpmyadmin or what you need
+
 ## Using the marvambass/phpmyadmin Container
 
 First you need a running MySQL Container (you could use: [marvambass/mysql](https://registry.hub.docker.com/u/marvambass/mysql/)).
