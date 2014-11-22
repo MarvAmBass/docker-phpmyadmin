@@ -10,7 +10,7 @@ then
   echo ">> switched MYSQL Port to: $PHPMYADMIN_MYSQL_PORT"
 fi
 
-if [ ! -z ${PHPMYADMIN_RELATIVE_URL_ROOT+x} ]
+if [ -z ${PHPMYADMIN_RELATIVE_URL_ROOT+x} ]
 then
   PHPMYADMIN_RELATIVE_URL_ROOT="/" 
 fi
