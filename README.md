@@ -9,7 +9,7 @@ The best is to just start this container if it's needed. And keep it stopped aft
 
 It's based on the [marvambass/nginx-ssl-php](https://registry.hub.docker.com/u/marvambass/nginx-ssl-php/) Image
 
-View in Docker Registry [marvambass/nginx-phpmyadmin](https://registry.hub.docker.com/u/marvambass/phpmyadmin/)
+View in Docker Registry [marvambass/phpmyadmin](https://registry.hub.docker.com/u/marvambass/phpmyadmin/)
 
 View in GitHub [MarvAmBass/docker-phpmyadmin](https://github.com/MarvAmBass/docker-phpmyadmin)
 
@@ -21,6 +21,10 @@ View in GitHub [MarvAmBass/docker-phpmyadmin](https://github.com/MarvAmBass/dock
  * default: _3306_ - if you use a different mysql port change it
 * __PHPMYADMIN\_RELATIVE\_URL\_ROOT__
  * default: _/_ - you can chance that to /phpmyadmin or what you need
+* __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE__
+ * default: not set - if set to any value the HTTP Strict Transport Security will be activated on SSL Channel
+* __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE\_NO\_SUBDOMAINS__
+ * default: not set - if set together with __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE__ and set to any value the HTTP Strict Transport Security will be deactivated on subdomains
 
 ## Using the marvambass/phpmyadmin Container
 

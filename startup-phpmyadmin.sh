@@ -1,5 +1,27 @@
 #/bin/bash
 
+###
+# Pre Install
+###
+
+if [ ! -z ${PHPMYADMIN_HSTS_HEADERS_ENABLE+x} ]
+then
+  echo ">> HSTS Headers enabled"
+  sed -i 's/#add_header Strict-Transport-Security/add_header Strict-Transport-Security/g' /etc/nginx/conf.d/nginx-phpmyadmin.conf
+
+  if [ ! -z ${PHPMYADMIN_HSTS_HEADERS_ENABLE_NO_SUBDOMAINS+x} ]
+  then
+    echo ">> HSTS Headers configured without includeSubdomains"
+    sed -i 's/; includeSubdomains//g' /etc/nginx/conf.d/nginx-phpmyadmin.conf
+  fi
+else
+  echo ">> HSTS Headers disabled"
+fi
+
+###
+# Install
+###
+
 PHPMYADMIN_RANDOM=`perl -e 'my @chars = ("A".."Z", "a".."z"); my $string; $string .= $chars[rand @chars] for 1..46; print $string;'` # returns exactly 46 random chars
 sed -i "s/DOCKER_RANDOM/$PHPMYADMIN_RANDOM/g" /phpmyadmin/config.inc.php
 echo ">> switched PHPmyAdmin 'blowfish_secret'"
