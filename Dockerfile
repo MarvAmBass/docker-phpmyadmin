@@ -1,9 +1,9 @@
 FROM marvambass/nginx-ssl-php
 MAINTAINER MarvAmBass
 
-ENV DH_SIZE 512
+ENV DH_SIZE 1024
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update; apt-get install -y \
     mysql-client \
     php5-mysql \
     php5-gd \
@@ -20,10 +20,10 @@ RUN rm -rf /usr/share/nginx/html/*
 # install nginx phpmyadmin config
 ADD nginx-phpmyadmin.conf /etc/nginx/conf.d/nginx-phpmyadmin.conf
 
-RUN wget "http://sourceforge.net/projects/phpmyadmin/files/latest/download" -O phpMyAdmin.zip
-RUN unzip phpMyAdmin.zip
-RUN rm phpMyAdmin.zip
-RUN mv phpMyAdmin-*-languages /phpmyadmin
+RUN wget "http://sourceforge.net/projects/phpmyadmin/files/latest/download" -O phpMyAdmin.zip && \
+    unzip phpMyAdmin.zip && \
+    rm phpMyAdmin.zip; \
+    mv phpMyAdmin-*-languages /phpmyadmin
 
 
 # install personal phpmyadmin config
