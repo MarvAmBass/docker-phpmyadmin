@@ -22,7 +22,7 @@ RUN rm -rf /usr/share/nginx/html/*
 # install nginx phpmyadmin config
 ADD nginx-phpmyadmin.conf /etc/nginx/conf.d/nginx-phpmyadmin.conf
 
-RUN wget "http://sourceforge.net/projects/phpmyadmin/files/latest/download" -O phpMyAdmin.zip && \
+RUN wget "https://files.phpmyadmin.net/phpMyAdmin/4.6.5.2/phpMyAdmin-4.6.5.2-all-languages.zip" -O phpMyAdmin.zip && \
     unzip phpMyAdmin.zip && \
     rm phpMyAdmin.zip; \
     mv phpMyAdmin-*-languages /phpmyadmin
