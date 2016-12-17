@@ -20,7 +20,7 @@ View in GitHub [MarvAmBass/docker-phpmyadmin](https://github.com/MarvAmBass/dock
 * __DH\_SIZE__
  * default: 512 fast but a bit unsecure. if you need more security just use a higher value
 * __PHPMYADMIN\_MYSQL\_HOST__
- * default: __mysql - if you use a different mysql host change it
+ * default: _mysql_ - if you use a different mysql host change it
 * __PHPMYADMIN\_MYSQL\_PORT__
  * default: _3306_ - if you use a different mysql port change it
 * __PHPMYADMIN\_RELATIVE\_URL\_ROOT__
