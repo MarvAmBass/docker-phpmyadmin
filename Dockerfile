@@ -37,5 +37,8 @@ ADD config.inc.php /phpmyadmin/config.inc.php
 # add startup.sh
 ADD startup-phpmyadmin.sh /opt/startup-phpmyadmin.sh
 
+COPY docker-healthcheck /usr/local/bin/
+HEALTHCHECK CMD ["docker-healthcheck"]
+
 # add '/opt/startup-phpmyadmin.sh' to entrypoint.sh
 RUN sed -i 's/#!\/bin\/bash/#!\/bin\/bash\n\/opt\/startup-phpmyadmin.sh/g' /opt/entrypoint.sh

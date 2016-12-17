@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -z ${PHPMYADMIN_RELATIVE_URL_ROOT+x} ]; then
+  PHPMYADMIN_RELATIVE_URL_ROOT="/"
+fi
+
+wget -O - --no-check-certificate https://127.0.0.1/$PHPMYADMIN_RELATIVE_URL_ROOT 2>/dev/null | grep phpMyAdmin
+exit $?
