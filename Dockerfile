@@ -3,13 +3,15 @@ MAINTAINER MarvAmBass
 
 ENV DH_SIZE 1024
 
-RUN apt-get update; apt-get install -y \
-    mysql-client \
-    php5-mysql \
-    php5-gd \
-    php5-mcrypt \
-    wget \
-    unzip
+RUN apt-get -q -y update && \
+    apt-get -q -y install mysql-client \
+                          php5-mysql \
+                          php5-gd \
+                          php5-mcrypt \
+                          wget \
+                          unzip && \
+    apt-get -q -y clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*;
 
 RUN php5enmod mcrypt
 RUN sed -i 's/upload_max_filesize = 2M/upload_max_filesize = 2000M/g' /etc/php5/fpm/php.ini
