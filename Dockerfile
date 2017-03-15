@@ -20,7 +20,7 @@ RUN php5enmod mcrypt; \
     echo "clean http directory"; \
     rm -rf /usr/share/nginx/html/*; \
     \
-    wget "https://files.phpmyadmin.net/phpMyAdmin/4.6.5.2/phpMyAdmin-4.6.5.2-all-languages.zip" -O phpMyAdmin.zip && \
+    wget "https://files.phpmyadmin.net/phpMyAdmin/4.6.6/phpMyAdmin-4.6.6-all-languages.zip" -O phpMyAdmin.zip && \
     unzip phpMyAdmin.zip && \
     rm phpMyAdmin.zip; \
     mv phpMyAdmin-*-languages /phpmyadmin; \
