@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+
+  db:
+    image: mariadb
+    command: --max-allowed-packet=64MB
+    restart: unless-stopped
+    volumes:
+      - ./db:/var/lib/mysql
+    environment:
+      - TZ=Europe/Berlin
+
+      - MYSQL_ROOT_PASSWORD=myadmin
+
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpassword
+      
+  phpmyadmin:
+    build: .
+    image: marvambass/phpmyadmin
+    restart: unless-stopped
+    environment: 
+      - TZ=Europe/Berlin
+
+      - DISABLE_TLS=disable
+
+      - DB_HOST=db
+      - SECRET=Neek6neeh4ohNaingohho3kohshie3ki
+    ports: 
+      - 8080:80
+    links:
+      - "db:db"
+    depends_on:
+      - db    

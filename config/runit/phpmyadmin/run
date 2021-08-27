@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "$DB_HOST" ]; then
+  DB_HOST=db
+fi
+echo ">> using db host: $DB_HOST"
+sed -i 's/localhost/'"$DB_HOST"'/g' /var/www/html/phpmyadmin/config.inc.php
+
+if [ -z "$SECRET" ]; then
+  SECRET=$(pwgen 32 1)
+  echo ">> using blowfish_secret: $SECRET"
+fi
+sed -i "s/cfg\['blowfish_secret'\] = '.*/cfg['blowfish_secret'] = '"$SECRET"';/g" /var/www/html/phpmyadmin/config.inc.php
+
+echo ">> phpmyadmin configured"
+sleep infinity

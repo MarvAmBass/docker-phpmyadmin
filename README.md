@@ -1,39 +1,49 @@
-# Docker phpMyAdmin Container (based on marvambass/phpmyadmin)
-_maintained by MarvAmBass_
+# phpmyadmin - (marvambass/phpmyadmin) (+ optional tls) on debian, apache2 [x86 + arm]
 
-[FAQ - All you need to know about the marvambass Containers](https://marvin.im/docker-faq-all-you-need-to-know-about-the-marvambass-containers/)
+_maintained by MarvAmBass_
 
 ## What is it
 
-This Dockerfile (available as ___marvambass/phpmyadmin___) gives you a completly secure phpMyAdmin.
+This Dockerfile (available as ___marvambass/phpmyadmin___) gives you a ready to use phpmyadmin installation with optional tls.
 
-The best is to just start this container if it's needed. And keep it stopped afterwarts.
+Note: This container only supports `mysql` / `mariadb` database servers.
+There is no internal mysql-server available - so you need to setup a seconds container for that (take a look at `docker-compose.yml`)
 
-It's based on the [marvambass/nginx-ssl-php](https://registry.hub.docker.com/u/marvambass/nginx-ssl-php/) Image
-
-View in Docker Registry [marvambass/phpmyadmin](https://registry.hub.docker.com/u/marvambass/phpmyadmin/)
+View in Docker Registry [marvambass/phpmyadmin](https://hub.docker.com/r/marvambass/phpmyadmin)
 
 View in GitHub [MarvAmBass/docker-phpmyadmin](https://github.com/MarvAmBass/docker-phpmyadmin)
 
+This Dockerfile is based on the [marvambass/apache2-ssl-secure](https://registry.hub.docker.com/u/marvambass/apache2-ssl-secure/) `debian:10` based image.
+
+## Changelogs
+
+* 2021-08-27
+    * complete rework
+    * new inital commit
+    * multiarch build
+
+## How to use
+
+This container needs to connect to a database, so take a look at the `docker-compose.yml`
+
 ## Environment variables and defaults
 
-* __DH\_SIZE__
- * default: 512 fast but a bit unsecure. if you need more security just use a higher value
-* __PHPMYADMIN\_MYSQL\_HOST__
- * default: _mysql_ - if you use a different mysql host change it
-* __PHPMYADMIN\_MYSQL\_PORT__
- * default: _3306_ - if you use a different mysql port change it
-* __PHPMYADMIN\_RELATIVE\_URL\_ROOT__
- * default: _/_ - you can chance that to /phpmyadmin or what you need
-* __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE__
+* __DB\_HOST__
+ * host of mysql db
+ * default: `db`
+
+* __SECRET__
+ * phpmyadmin `blowfish_secret` - should be a 32 character string
+ * default: _auto generated string using: `pwgen 32 1`_
+
+### BASEIMAGE: Environment variables and defaults
+
+* __DISABLE\_TLS__
+ * default: not set - if set yo any value `https` and the `HSTS_HEADERS_*` will be disabled
+
+* __HSTS\_HEADERS\_ENABLE__
  * default: not set - if set to any value the HTTP Strict Transport Security will be activated on SSL Channel
-* __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE\_NO\_SUBDOMAINS__
- * default: not set - if set together with __PHPMYADMIN\_HSTS\_HEADERS\_ENABLE__ and set to any value the HTTP Strict Transport Security will be deactivated on subdomains
 
-## Using the marvambass/phpmyadmin Container
+* __HSTS\_HEADERS\_ENABLE\_NO\_SUBDOMAINS__
+ * default: not set - if set together with __HSTS\_HEADERS\_ENABLE__ and set to any value the HTTP Strict Transport Security will be deactivated on subdomains
 
-First you need a running MySQL Container (you could use: [marvambass/mysql](https://registry.hub.docker.com/u/marvambass/mysql/)).
-
-You need to _--link_ your mysql container to marvambass/phpmyadmin with the name __mysql__
-
-    docker run -d -p 443:443 --link mysql:mysql --name phpmyadmin marvambass/phpmyadmin
